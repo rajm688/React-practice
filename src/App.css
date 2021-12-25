@@ -1,4 +1,4 @@
-img {
+/* img {
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -15,4 +15,36 @@ h1 {
 }
 body {
   background-color: mintcream;
+} */
+.App {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 10px;
+}
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 250px;
+  border-radius: 10px 10px 0 0;
+}
+.movies {
+  width: 250px;
+  border-radius: 10px;
+  margin: 10px;
+  box-shadow: 5px 5px 5px gray;
+}
+p {
+  padding: 0 10px;
+}
+.heading {
+  display: flex;
+  justify-content: space-between;
+}
+.likes {
+  border: 0;
+  background-color: white;
+}
+.likebut {
+  display: flex;
 }

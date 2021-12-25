@@ -1,5 +1,5 @@
-import './App.css';
-
+import "./App.css";
+import { useState } from "react";
 // export default function App() {
 //   return (
 //     <div className="App">
@@ -60,7 +60,6 @@ import './App.css';
 //   );
 // }
 
-
 // export default function App() {
 //   return (
 //     <div className="App">
@@ -90,37 +89,162 @@ import './App.css';
 //     </div>
 //   );
 // }
+// export default function App() {
+//   const datas =[
+//     {
+//       name:"Growlithe",
+//       img:"https://assets.pokemon.com/assets/cms2/img/pokedex/full/058.png"
+//     },
+//     {
+//       name:"Squido",
+//       img:"https://assets.pokemon.com/assets/cms2/img/pokedex/full/007.png"
+//     },
+//     {
+//       name:"Pikachu",
+//       img:"https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png"
+//     },
+//     ]
+//   return (
+//     <div className="App">
+//       {/* {datas.map((data)=>(<Hello name={data.name} img={data.img}/>))} */}
+
+//       {datas.map(({img,name})=>(<Hello name={name} img={img}/>))}
+//     </div>
+//   );
+// }
+// // function Hello(props) {
+// // function Hello({ name, img }) {
+//   function Hello (props){
+//     const {name,img} = props
+//   return (
+//     <div id="main">
+//       <h1>Hello {name}</h1>
+//       <img src={img} alt={name} />
+//     </div>
+//   );
+// }
+
 export default function App() {
-  const datas =[
+  const movies = [
     {
-      name:"Growlithe",
-      img:"https://assets.pokemon.com/assets/cms2/img/pokedex/full/058.png"
+      name: "Cars",
+      poster: "https://upload.wikimedia.org/wikipedia/en/3/34/Cars_2006.jpg",
+      rating: 4.6,
+      summary:
+        "Cars is a 2006 American computer-animated sports comedy film produced by Pixar Animation Studios and released by Walt Disney Pictures."
     },
     {
-      name:"Squido",
-      img:"https://assets.pokemon.com/assets/cms2/img/pokedex/full/007.png"
+      name: "Toy Story",
+      poster: "https://upload.wikimedia.org/wikipedia/en/1/13/Toy_Story.jpg",
+      rating: 4.8,
+      summary:
+        "Toy Story is a 1995 American computer-animated comedy film produced by Pixar Animation Studios and released by Walt Disney Pictures."
+    },
+
+    {
+      name: "Up",
+      poster:
+        "https://upload.wikimedia.org/wikipedia/en/0/05/Up_%282009_film%29.jpg",
+      rating: 4.3,
+      summary:
+        "Up is a 2009 American computer-animated film directed by Pete Docter, and co-written by Bob Peterson."
     },
     {
-      name:"Pikachu",
-      img:"https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png"
+      name: "Inside Out",
+      poster:
+        "https://upload.wikimedia.org/wikipedia/en/0/0a/Inside_Out_%282015_film%29_poster.jpg",
+      rating: 4.7,
+      summary:
+        "nside Out is a 2015 American computer-animated film directed by Pete Docter, who wrote the script with Meg LeFauve and Josh Cooley."
     },
-    ]
+    {
+      name: "Jack-Jack Attack",
+      poster:
+        "https://upload.wikimedia.org/wikipedia/en/2/28/Jack-Jack_Attack_poster.jpg",
+      rating: 4.5,
+      summary:
+        "Jack-Jack Attack is a 2005 computer animated short film produced by Pixar and written and directed by Brad Bird. The short film is a spin-off on his 2004 film The Incredibles."
+    },
+    {
+      name: "The Good Dinosaur",
+      poster:
+        "https://upload.wikimedia.org/wikipedia/en/8/80/The_Good_Dinosaur_poster.jpg",
+      rating: 4.7,
+      summary:
+        "he Good Dinosaur is a 2015 American computer-animated adventure film[7] produced by Pixar Animation Studios and distributed by Walt Disney Studios Motion Pictures."
+    },
+    {
+      name: "WALL-E",
+      poster: "https://upload.wikimedia.org/wikipedia/en/c/c2/WALL-Eposter.jpg",
+      rating: 4.9,
+      summary:
+        "WALL-E (stylized with an interpunct as WALL·E) is a 2008 American computer-animated science fiction film[4] produced by Pixar Animation Studios and released by Walt Disney Pictures."
+    }
+  ];
   return (
     <div className="App">
-      {/* {datas.map((data)=>(<Hello name={data.name} img={data.img}/>))} */}
-
-      {datas.map(({img,name})=>(<Hello name={name} img={img}/>))}
+      {/* //we can pass array as props as shown below */}
+      <MovieList movies={movies} />
     </div>
   );
 }
-// function Hello(props) {
-// function Hello({ name, img }) {
-  function Hello (props){
-    const {name,img} = props
+function MovieList({ movies }) {
   return (
-    <div id="main">
-      <h1>Hello {name}</h1>
-      <img src={img} alt={name} />
+    <>
+      {movies.map(({ name, poster, rating, summary }) => (
+        <Movie name={name} poster={poster} rating={rating} summary={summary} />
+      ))}
+    </>
+  );
+}
+function Movie({ name, poster, rating, summary }) {
+  //conditional styling using ternary operator
+  //trenary operators and maping should be contained inside the {}
+  const [show, setshow] = useState(true);
+  const styles = { color: rating > 4.5 ? "green" : "red" }; //css property names should be in calmel casing
+  // const hidden = { display: !show ? "none" : "block" };
+  return (
+    <div className="movies">
+      {/* style properties should be as objects and should be encolsed in flower braces */}
+      <img src={poster} alt={name} />
+      <div className="heading">
+        <h3>{name}</h3>
+        <button className="likes" onClick={() => setshow(!show)}>
+          <span role="img" aria-label="down">
+            ⏬
+          </span>
+        </button>
+        <p style={styles}>
+          <span role="img" aria-label="star">
+            ⭐
+          </span>
+          {rating}
+        </p>
+        <Counter />
+      </div>
+      {show? <p><strong>Summary:</strong>{summary}</p>: ""}
+    </div>
+  );
+}
+function Counter() {
+  const intstate = 0;
+  const [like, setlike] = useState(intstate);
+  const [dislike, setdislike] = useState(intstate);
+
+  return (
+    <div className="likebut">
+      <button className="likes" onClick={() => setlike(like + 1)}>
+        <span role="img" aria-label="thumbsup">
+          👍
+        </span>{" "}
+        {like}
+      </button>
+      <button className="likes" onClick={() => setdislike(dislike + 1)}>
+        <span role="img" aria-label="thumbsdown">
+          👎
+        </span>{" "}
+        {dislike}
+      </button>
     </div>
   );
 }
