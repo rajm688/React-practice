@@ -1,5 +1,5 @@
 import { Movie } from "./Movie";
-
+import DeleteIcon from '@mui/icons-material/Delete';
 export function MovieList({ movies, setmovies }) {
   return (
     <>
@@ -18,9 +18,7 @@ export function MovieList({ movies, setmovies }) {
                 setmovies(remainingMovies);
               }}
             >
-              <span role="img" aria-label="delete">
-                ❌
-              </span>
+              <DeleteIcon color="error"/>
             </button>
           }
           name={name}

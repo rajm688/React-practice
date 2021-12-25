@@ -1,24 +1,31 @@
+import * as React from 'react';
 import { useState } from "react";
-
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
+import Badge from '@mui/material/Badge';
 export function Counter() {
   const intstate = 0;
   const [like, setlike] = useState(intstate);
   const [dislike, setdislike] = useState(intstate);
 
   return (
+    <div style={{display:"flex", gap: "10px"}}>
+      <div><Badge badgeContent={like} color="success">
+    <button  onClick={() => setlike(like + 1)}>
+        
+        <ThumbUpIcon color="success"/>
+        
+      </button>
+    </Badge>
+    </div>
     <div>
-      <button onClick={() => setlike(like + 1)}>
-        <span role="img" aria-label="thumbsup">
-          👍
-        </span>{" "}
-        {like}
+    <Badge badgeContent={dislike} color="warning">
+    <button onClick={() => setdislike(dislike + 1)}>
+        <ThumbDownAltIcon color="warning"/>
+        
       </button>
-      <button onClick={() => setdislike(dislike + 1)}>
-        <span role="img" aria-label="thumbsdown">
-          👎
-        </span>{" "}
-        {dislike}
-      </button>
+    </Badge>
+    </div>
     </div>
   );
 }

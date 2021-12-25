@@ -16,44 +16,31 @@ h1 {
 body {
   background-color: mintcream;
 } */
+.App{
+  margin: 10px;
+}
 .movieslist {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
 }
 img {
   display: block;
   margin-left: auto;
   margin-right: auto;
   width: 250px;
-  border-radius: 10px 10px 0 0;
 }
-.movies {
+/* .movies {
   width: 250px;
   border-radius: 10px;
   margin: 10px;
   box-shadow: 5px 5px 5px gray;
-}
-#input {
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  margin: 10px auto 10px auto;
-}
-#submit {
-  width: 53.5%;
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  margin: 10px auto 10px auto;
-}
-p {
-  padding: 0 10px;
-}
+} */
+
 .heading {
   display: flex;
   justify-content: space-between;
+  padding-right: 10px;
 }
 #buttons {
   display: flex;
@@ -63,4 +50,13 @@ button {
   font-size: 15px;
   border: 0;
   background-color: white;
+}
+#inputs{
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+gap:10px
+}
+.badges{
+  margin:0 10px 0 10px;
 }

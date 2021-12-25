@@ -1,5 +1,8 @@
+import * as React from 'react';
+import TextField from '@mui/material/TextField';
 import { MovieList } from "./MovieList";
 import { useState } from "react";
+import Button from '@mui/material/Button';
 
 export function AddMovie({ intmovies }) {
   const [movies, setmovies] = useState(intmovies);
@@ -10,34 +13,13 @@ export function AddMovie({ intmovies }) {
   return (
     <>
       <div id="inputs">
-        <input
-          id="input"
-          onChange={(e) => setname(e.target.value)}
-          placeholder="Enter the Movie name"
-        />
-        <input
-          id="input"
-          onChange={(e) => setposter(e.target.value)}
-          placeholder="Enter the Movie Poster"
-        />
-        <input
-          id="input"
-          onChange={(e) => setrating(e.target.value)}
-          placeholder="Enter the Movie Rating"
-        />
-        <input
-          id="input"
-          onChange={(e) => setsummary(e.target.value)}
-          placeholder="Enter the Movie Summary"
-        />
-        <button
-          id="submit"
-          onClick={() =>
+      <TextField className="input" onChange={(e) => setname(e.target.value)} id="filled-basic" label="Enter the Movie name" variant="filled" />
+      <TextField className="input" onChange={(e) => setposter(e.target.value)} id="filled-basic" label="Enter the Movie Poster" variant="filled" />
+      <TextField className="input" onChange={(e) => setrating(e.target.value)} id="filled-basic" label="Enter the Movie Rating" variant="filled" />
+      <TextField className="input" onChange={(e) => setsummary(e.target.value)} id="filled-basic" label="Enter the Movie Summary" variant="filled" />
+      <Button  onClick={() =>
             setmovies([...movies, { name, poster, rating, summary }])
-          }
-        >
-          Add Movie
-        </button>
+          } variant="contained">Add Movie</Button> 
       </div>
       <div className="movieslist">
         <MovieList movies={movies} setmovies={setmovies} />
