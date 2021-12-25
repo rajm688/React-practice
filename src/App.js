@@ -1,5 +1,6 @@
+import { useState } from "react/cjs/react.development";
 import "./App.css";
-import { useState } from "react";
+import { MovieList } from "./MovieList";
 // export default function App() {
 //   return (
 //     <div className="App">
@@ -125,7 +126,7 @@ import { useState } from "react";
 // }
 
 export default function App() {
-  const movies = [
+  const intmovies = [
     {
       name: "Cars",
       poster: "https://upload.wikimedia.org/wikipedia/en/3/34/Cars_2006.jpg",
@@ -183,68 +184,29 @@ export default function App() {
   ];
   return (
     <div className="App">
+      <AddMovies intmovies={intmovies}/>
       {/* //we can pass array as props as shown below */}
-      <MovieList movies={movies} />
     </div>
   );
 }
-function MovieList({ movies }) {
-  return (
-    <>
-      {movies.map(({ name, poster, rating, summary }) => (
-        <Movie name={name} poster={poster} rating={rating} summary={summary} />
-      ))}
-    </>
-  );
-}
-function Movie({ name, poster, rating, summary }) {
-  //conditional styling using ternary operator
-  //trenary operators and maping should be contained inside the {}
-  const [show, setshow] = useState(true);
-  const styles = { color: rating > 4.5 ? "green" : "red" }; //css property names should be in calmel casing
-  // const hidden = { display: !show ? "none" : "block" };
-  return (
-    <div className="movies">
-      {/* style properties should be as objects and should be encolsed in flower braces */}
-      <img src={poster} alt={name} />
-      <div className="heading">
-        <h3>{name}</h3>
-        <button className="likes" onClick={() => setshow(!show)}>
-          <span role="img" aria-label="down">
-            ⏬
-          </span>
-        </button>
-        <p style={styles}>
-          <span role="img" aria-label="star">
-            ⭐
-          </span>
-          {rating}
-        </p>
-        <Counter />
-      </div>
-      {show? <p><strong>Summary:</strong>{summary}</p>: ""}
-    </div>
-  );
-}
-function Counter() {
-  const intstate = 0;
-  const [like, setlike] = useState(intstate);
-  const [dislike, setdislike] = useState(intstate);
-
-  return (
-    <div className="likebut">
-      <button className="likes" onClick={() => setlike(like + 1)}>
-        <span role="img" aria-label="thumbsup">
-          👍
-        </span>{" "}
-        {like}
-      </button>
-      <button className="likes" onClick={() => setdislike(dislike + 1)}>
-        <span role="img" aria-label="thumbsdown">
-          👎
-        </span>{" "}
-        {dislike}
-      </button>
-    </div>
-  );
+function AddMovies({intmovies}){
+  const[movies,setmovies] = useState(intmovies)
+  const[name,setname] = useState("")
+  const [poster,setposter] = useState("")
+  const[rating,setrating] = useState("")
+  const[summary,setsummary] = useState("")
+return(
+  <>
+  <div id="inputs">
+    <input id="input" onChange={(e)=>setname(e.target.value)} placeholder="Enter the Movie name"/>
+    <input id="input" onChange={(e)=>setposter(e.target.value)} placeholder="Enter the Movie Poster"/>
+    <input id="input" onChange={(e)=>setrating(e.target.value)} placeholder="Enter the Movie Rating"/>
+    <input id="input" onChange={(e)=>setsummary(e.target.value)} placeholder="Enter the Movie Summary"/>
+    <button id="submit" onClick={()=>setmovies([...movies,{name,poster,rating,summary}])}>Add Movie</button>
+  </div>
+  <div className="movieslist" >
+  <MovieList movies={movies} />
+  </div>
+  </>
+)
 }

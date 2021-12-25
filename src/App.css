@@ -16,7 +16,7 @@ h1 {
 body {
   background-color: mintcream;
 } */
-.App {
+.movieslist {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 10px;
@@ -33,6 +33,20 @@ img {
   border-radius: 10px;
   margin: 10px;
   box-shadow: 5px 5px 5px gray;
+}
+#input{
+  width:50%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin:10px auto 10px auto;
+}
+#submit{
+  width:53.5%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin:10px auto 10px auto;
 }
 p {
   padding: 0 10px;
