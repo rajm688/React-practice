@@ -6,14 +6,14 @@ export function Counter() {
   const [dislike, setdislike] = useState(intstate);
 
   return (
-    <div className="likebut">
-      <button className="likes" onClick={() => setlike(like + 1)}>
+    <div >
+      <button  onClick={() => setlike(like + 1)}>
         <span role="img" aria-label="thumbsup">
           👍
         </span>{" "}
         {like}
       </button>
-      <button className="likes" onClick={() => setdislike(dislike + 1)}>
+      <button  onClick={() => setdislike(dislike + 1)}>
         <span role="img" aria-label="thumbsdown">
           👎
         </span>{" "}

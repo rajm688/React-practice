@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Counter } from "./Counter";
 
-export function Movie({ name, poster, rating, summary }) {
+export function Movie({ name, poster, rating, summary,deletebutton }) {
   //conditional styling using ternary operator
   //trenary operators and maping should be contained inside the {}
   const [show, setshow] = useState(true);
@@ -14,23 +14,27 @@ export function Movie({ name, poster, rating, summary }) {
       <img src={poster} alt={name} />
       <div className="heading">
         <h3>{name}</h3>
-        <button className="likes" onClick={() => setshow(!show)}>
-          <span role="img" aria-label="down">
-            ⏬
-          </span>
-        </button>
         <p style={styles}>
           <span role="img" aria-label="star">
             ⭐
           </span>
           {rating}
         </p>
+        </div>
+        <div id="buttons">
+        <button  onClick={() => setshow(!show)}>
+          <span role="img" aria-label="down">
+            ⏬
+          </span>
+        </button>
         <Counter />
+
+        {deletebutton}
       </div>
       {/* conditional renndering */}
       {show ? (
         <p>
-          <strong>Summary:</strong>
+          <strong>Summary: </strong>
           {summary}
         </p>
       ) : (
