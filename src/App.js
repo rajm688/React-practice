@@ -1,5 +1,6 @@
-import { AddMovies } from "./AddMovies";
-import "./App.css";
+import "./styles.css";
+import { AddMovie } from "./AddMovie";
+
 // export default function App() {
 //   return (
 //     <div className="App">
@@ -123,7 +124,6 @@ import "./App.css";
 //     </div>
 //   );
 // }
-
 export default function App() {
   const intmovies = [
     {
@@ -183,9 +183,8 @@ export default function App() {
   ];
   return (
     <div className="App">
-      <AddMovies intmovies={intmovies}/>
+      <AddMovie intmovies={intmovies} />
       {/* //we can pass array as props as shown below */}
     </div>
   );
 }
-

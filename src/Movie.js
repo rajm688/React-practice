@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Counter } from "./Counter";
 
-export function Movie({ name, poster, rating, summary,deletebutton }) {
+export function Movie({ name, poster, rating, summary, deletebutton }) {
   //conditional styling using ternary operator
   //trenary operators and maping should be contained inside the {}
   const [show, setshow] = useState(true);
@@ -20,9 +20,9 @@ export function Movie({ name, poster, rating, summary,deletebutton }) {
           </span>
           {rating}
         </p>
-        </div>
-        <div id="buttons">
-        <button  onClick={() => setshow(!show)}>
+      </div>
+      <div id="buttons">
+        <button onClick={() => setshow(!show)}>
           <span role="img" aria-label="down">
             ⏬
           </span>
