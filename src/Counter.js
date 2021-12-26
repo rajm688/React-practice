@@ -7,7 +7,7 @@ export function Counter() {
   const intstate = 0;
   const [like, setlike] = useState(intstate);
   const [dislike, setdislike] = useState(intstate);
-
+  const dislikefun = (() => setdislike(dislike + 1)); // we can have named functions in react
   return (
     <div style={{display:"flex", gap: "10px"}}>
       <div><Badge badgeContent={like} color="success">
@@ -20,7 +20,7 @@ export function Counter() {
     </div>
     <div>
     <Badge badgeContent={dislike} color="warning">
-    <button onClick={() => setdislike(dislike + 1)}>
+    <button onClick={dislikefun}>
         <ThumbDownAltIcon color="warning"/>
         
       </button>

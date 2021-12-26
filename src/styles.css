@@ -21,7 +21,8 @@ body {
 }
 .movieslist {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  justify-content: space-evenly;
   gap: 20px;
 }
 img {
@@ -59,4 +60,8 @@ gap:10px
 }
 .badges{
   margin:0 10px 0 10px;
+}
+body{
+  font-family: 'Courgette', cursive;
+
 }

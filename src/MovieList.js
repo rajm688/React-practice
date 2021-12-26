@@ -10,13 +10,8 @@ export function MovieList({ movies, setmovies }) {
         <Movie
           deletebutton={
             <button
-              onClick={() => {
-                const deleteindex = index;
-                const remainingMovies = movies.filter(
-                  (mv, idx) => deleteindex !== idx
-                );
-                setmovies(remainingMovies);
-              }}
+              onClick={deletefun(index)}  // we can refactor the function by right clicking -> refactor -> convert to inner function
+              
             >
               <DeleteIcon color="error"/>
             </button>
@@ -29,4 +24,14 @@ export function MovieList({ movies, setmovies }) {
       ))}
     </>
   );
+
+  function deletefun(index) {
+    return () => {
+      const deleteindex = index;
+      const remainingMovies = movies.filter(
+        (mv, idx) => deleteindex !== idx
+      );
+      setmovies(remainingMovies);
+    };
+  }
 }

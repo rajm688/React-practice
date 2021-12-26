@@ -6,6 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Typography from '@mui/material/Typography';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import StarIcon from '@mui/icons-material/Star';
 import { useState } from "react";
 import { Counter } from "./Counter";
 
@@ -19,19 +20,17 @@ export function Movie({ name, poster, rating, summary, deletebutton }) {
   return (
     <div className="movies">
       {/* style properties should be as objects and should be encolsed in flower braces */}
-      <Card sx={{ maxWidth: 345 }}>
+      <Card sx={{width:"250px" ,height:"560px", boxShadow:"5px 5px 5px gray" }}>
       <CardMedia
         component="img"
-        height="194"
+        height="294"
         image={poster}
         alt={name}
       />
       <div className="heading">
       <CardHeader title={name}/>
         <p style={styles}>
-          <span role="img" aria-label="star">
-            ⭐
-          </span>
+        <StarIcon style={{fontSize:"20px"}}/>
           {rating}
         </p>
       </div>
@@ -46,10 +45,8 @@ export function Movie({ name, poster, rating, summary, deletebutton }) {
       {/* conditional renndering */}
       {show ? (
         <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the mussels,
-          if you like.
+        <Typography style={{textAlign : "justify"}} variant="body2" color="text.secondary">
+         {summary}
         </Typography>
       </CardContent>
       ) : (
