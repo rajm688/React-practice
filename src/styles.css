@@ -65,3 +65,21 @@ body{
   font-family: 'Courgette', cursive;
 
 }
+.color {
+  font-family: sans-serif;
+  text-align: center;
+}
+#colorpallet {
+  display: flex;
+  flex-wrap: wrap;
+}
+.links{
+  display: flex;
+  gap: 10px;
+  background-color: rgb(194, 194, 194);
+  padding: 10px;
+}
+.link{
+  text-decoration:none;
+
+}
