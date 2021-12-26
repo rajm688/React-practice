@@ -46,6 +46,7 @@ img {
 #buttons {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 button {
   font-size: 15px;
@@ -54,8 +55,8 @@ button {
 }
 #inputs{
   display: flex;
-  flex-direction: column;
-  margin: 10px;
+  justify-content: space-between;
+  align-items: center;
 gap:10px
 }
 .badges{
@@ -78,8 +79,8 @@ body{
   gap: 10px;
   background-color: rgb(194, 194, 194);
   padding: 10px;
+  margin: 0 0 10px 0;
 }
 .link{
   text-decoration:none;
-
 }

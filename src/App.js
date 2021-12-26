@@ -1,11 +1,15 @@
 import "./styles.css";
+import {useState} from "react"
 import {
   Switch,
   Route,
   Link
 } from "react-router-dom";
-import { AddMovie } from "./AddMovie";
-import { useState } from "react";
+import { AddMovie ,MoviesList } from "./AddMovie";
+import { ColorPick } from "./ColorPick";
+import { Home } from "./Home";
+import { Notfound } from "./Notfound";
+import { useParams } from "react-router-dom";
 
 // export default function App() {
 //   return (
@@ -131,20 +135,23 @@ import { useState } from "react";
 //   );
 // }
 export default function App() {
+
   const intmovies = [
     {
       name: "Cars",
       poster: "https://upload.wikimedia.org/wikipedia/en/3/34/Cars_2006.jpg",
       rating: 4.6,
       summary:
-        "Cars is a 2006 American computer-animated sports comedy film produced by Pixar Animation Studios and released by Walt Disney Pictures."
+        "Cars is a 2006 American computer-animated sports comedy film produced by Pixar Animation Studios and released by Walt Disney Pictures.",
+      trailer:"https://www.youtube.com/embed/SbXIj2T-_uk"
     },
     {
       name: "Toy Story",
       poster: "https://upload.wikimedia.org/wikipedia/en/1/13/Toy_Story.jpg",
       rating: 4.8,
       summary:
-        "Toy Story is a 1995 American computer-animated comedy film produced by Pixar Animation Studios and released by Walt Disney Pictures."
+        "Toy Story is a 1995 American computer-animated comedy film produced by Pixar Animation Studios and released by Walt Disney Pictures.",
+        trailer:"https://www.youtube.com/embed/rNk1Wi8SvNc"
     },
 
     {
@@ -153,7 +160,8 @@ export default function App() {
         "https://upload.wikimedia.org/wikipedia/en/0/05/Up_%282009_film%29.jpg",
       rating: 4.3,
       summary:
-        "Up is a 2009 American computer-animated film directed by Pete Docter, and co-written by Bob Peterson."
+        "Up is a 2009 American computer-animated film directed by Pete Docter, and co-written by Bob Peterson.",
+        trailer:"https://www.youtube.com/embed/ORFWdXl_zJ4"
     },
     {
       name: "Inside Out",
@@ -161,15 +169,17 @@ export default function App() {
         "https://upload.wikimedia.org/wikipedia/en/0/0a/Inside_Out_%282015_film%29_poster.jpg",
       rating: 4.7,
       summary:
-        "nside Out is a 2015 American computer-animated film directed by Pete Docter, who wrote the script with Meg LeFauve and Josh Cooley."
-    },
+        "nside Out is a 2015 American computer-animated film directed by Pete Docter, who wrote the script with Meg LeFauve and Josh Cooley.",
+    trailer:"https://www.youtube.com/embed/yRUAzGQ3nSY"
+      },
     {
       name: "Jack-Jack Attack",
       poster:
         "https://upload.wikimedia.org/wikipedia/en/2/28/Jack-Jack_Attack_poster.jpg",
       rating: 4.5,
       summary:
-        "Jack-Jack Attack is a 2005 computer animated short film produced by Pixar and written and directed by Brad Bird. The short film is a spin-off on his 2004 film The Incredibles."
+        "Jack-Jack Attack is a 2005 computer animated short film produced by Pixar and written and directed by Brad Bird. The short film is a spin-off on his 2004 film The Incredibles.",
+        trailer:"https://www.youtube.com/embed/0dQpFu8uRP0"
     },
     {
       name: "The Good Dinosaur",
@@ -177,32 +187,47 @@ export default function App() {
         "https://upload.wikimedia.org/wikipedia/en/8/80/The_Good_Dinosaur_poster.jpg",
       rating: 4.7,
       summary:
-        "he Good Dinosaur is a 2015 American computer-animated adventure film[7] produced by Pixar Animation Studios and distributed by Walt Disney Studios Motion Pictures."
+        "he Good Dinosaur is a 2015 American computer-animated adventure film[7] produced by Pixar Animation Studios and distributed by Walt Disney Studios Motion Pictures.",
+        trailer:"https://www.youtube.com/embed/O-RgquKVTPE"
     },
     {
       name: "WALL-E",
       poster: "https://upload.wikimedia.org/wikipedia/en/c/c2/WALL-Eposter.jpg",
       rating: 4.9,
       summary:
-        "WALL-E (stylized with an interpunct as WALL·E) is a 2008 American computer-animated science fiction film[4] produced by Pixar Animation Studios and released by Walt Disney Pictures."
+        "WALL-E (stylized with an interpunct as WALL·E) is a 2008 American computer-animated science fiction film[4] produced by Pixar Animation Studios and released by Walt Disney Pictures.",
+        trailer:"https://www.youtube.com/embed/CZ1CATNbXg0"
     }
   ];
-  return (
-    <div className="App">
+  const [movies, setmovies] = useState(intmovies);
+
+  return ( // routing usng <Link> tag
+    <div className="App"> 
       <div className="links">
-      <Link className="link" to="/Home">Home</Link>
+      <Link className="link" to="/">Home</Link>
+      <Link className="link" to="/addmovie">Add Movie</Link>
       <Link className="link" to="/Movies">Movies</Link>
-      <Link className="link" to="/ColorGame">Color Game</Link>
+      <Link className="link" to="/colorgame">Color Game</Link>
       </div>
 <Switch>
-  <Route path="/Home">
-    <h1>Home</h1>
+<Route exact path="/">
+  <Home/>
+  </Route>
+  <Route path="/Movies/:id">
+  <Moviedetails />
   </Route>
   <Route path="/Movies">
-  <AddMovie intmovies={intmovies} />
+    <MoviesList movies = {movies} setmovies={setmovies}/>
   </Route>
-  <Route path="/ColorGame">
+  <Route exact path="/colorgame">
   <ColorPick/>
+  </Route>
+  <Route path="/addmovie">
+  <AddMovie intmovies={intmovies} movies = {movies} setmovies={setmovies}/>
+{/* react matches by subsstring means it catches (displays) the first mmatched path in order to overcome we use exact attribute or keyword */}
+  </Route>
+  <Route path="**">
+    <Notfound/>
   </Route>
 </Switch>
 
@@ -210,37 +235,13 @@ export default function App() {
     </div>
   );
 }
-function ColorPick() {
-  return (
-    <div className="color">
-      <ColorPicker />
-    </div>
-  );
-}
-function ColorPicker() {
-  const [color, setcolor] = useState(" ");
-  const [colorlist, setcolorlist] = useState(["red", "blue", "green"]);
-  const styles = { backgroundColor: color };
-  return (
+
+function Moviedetails(){
+  const {id} = useParams()
+  return(
     <div>
-      <input style={styles} onChange={(e) => setcolor(e.target.value)} />
-      <button onClick={() => setcolorlist([...colorlist, color])}>
-        Click Me
-      </button>
-      <div id="colorpallet">
-        {colorlist.map((colors) => (
-          <ColorPalette color={colors} />
-        ))}
-      </div>
+      <h1>hello {id}</h1>
+      {/* <iframe width="588" height="331" src={trailer} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */}
     </div>
-  );
-}
-function ColorPalette({ color }) {
-  const styles = {
-    backgroundColor: color,
-    width: "100px",
-    height: "100px",
-    margin: "10px"
-  };
-  return <div style={styles}></div>;
+  )
 }

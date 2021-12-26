@@ -9,13 +9,15 @@ import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import StarIcon from '@mui/icons-material/Star';
 import { useState } from "react";
 import { Counter } from "./Counter";
-
-export function Movie({ name, poster, rating, summary, deletebutton }) {
+import InfoIcon from '@mui/icons-material/Info';
+import { IconButton } from '@mui/material';
+import { useHistory } from 'react-router-dom';
+export function Movie({id, name, poster, rating, summary, deletebutton }) {
   //conditional styling using ternary operator
   //trenary operators and maping should be contained inside the {}
   const [show, setshow] = useState(true);
   const styles = { color: rating > 4.5 ? "green" : "red" }; //css property names should be in calmel casing
-
+  const history = useHistory();
   // const hidden = { display: !show ? "none" : "block" };
   return (
     <div className="movies">
@@ -31,13 +33,16 @@ export function Movie({ name, poster, rating, summary, deletebutton }) {
       <CardHeader title={name}/>
         <p style={styles}>
         <StarIcon style={{fontSize:"20px"}}/>
-          {rating}
+          <span>{rating}</span>
         </p>
       </div>
       <div id="buttons">
+
         <button onClick={() => setshow(!show)}>
           {show ? <ExpandLessIcon/> :<ExpandMoreIcon/>}
         </button>
+      <IconButton onClick={()=>history.push(`/Movies/${id}`)} className='inlinebutton'><InfoIcon/></IconButton>
+
         <Counter />
 
         {deletebutton}

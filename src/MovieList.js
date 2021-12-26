@@ -16,6 +16,7 @@ export function MovieList({ movies, setmovies }) {
               <DeleteIcon color="error"/>
             </button>
           }
+          id = {index}
           name={name}
           poster={poster}
           rating={rating}
