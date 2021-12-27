@@ -2,7 +2,7 @@ import { ColorPicker } from "./ColorPicker";
 
 export function ColorPick() {
   return (
-    <div className="color">
+    <div className="colors">
       <ColorPicker />
     </div>
   );

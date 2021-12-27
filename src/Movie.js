@@ -38,9 +38,9 @@ export function Movie({id, name, poster, rating, summary, deletebutton }) {
       </div>
       <div id="buttons">
 
-        <button onClick={() => setshow(!show)}>
+        <IconButton onClick={() => setshow(!show)}>
           {show ? <ExpandLessIcon/> :<ExpandMoreIcon/>}
-        </button>
+        </IconButton>
       <IconButton onClick={()=>history.push(`/Movies/${id}`)} className='inlinebutton'><InfoIcon/></IconButton>
 
         <Counter />

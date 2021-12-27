@@ -1,16 +1,20 @@
 import "./styles.css";
-import {useState} from "react"
-import {
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-import { AddMovie ,MoviesList } from "./AddMovie";
+import * as React from "react";
+import { useState } from "react";
+import Paper from "@mui/material/Paper";
+import { Switch, Route, useHistory } from "react-router-dom";
+import { AddMovie, MoviesList } from "./AddMovie";
 import { ColorPick } from "./ColorPick";
 import { Home } from "./Home";
 import { Notfound } from "./Notfound";
 import { useParams } from "react-router-dom";
-
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Button from "@mui/material/Button";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import NightsStayIcon from "@mui/icons-material/NightsStay";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import { useEffect } from "react";
 // export default function App() {
 //   return (
 //     <div className="App">
@@ -135,113 +139,183 @@ import { useParams } from "react-router-dom";
 //   );
 // }
 export default function App() {
+  const [movies, setmovies] = useState([]);
+  const url = "https://61c9c7ff20ac1c0017ed8e43.mockapi.io/disney";
+  useEffect(() => {
+    fetch(url,{method:"GET"})
+      .then((data) => data.json())
+      .then((mvs) => setmovies(mvs));
+  }, []);
 
-  const intmovies = [
-    {
-      name: "Cars",
-      poster: "https://upload.wikimedia.org/wikipedia/en/3/34/Cars_2006.jpg",
-      rating: 4.6,
-      summary:
-        "Cars is a 2006 American computer-animated sports comedy film produced by Pixar Animation Studios and released by Walt Disney Pictures.",
-      trailer:"https://www.youtube.com/embed/SbXIj2T-_uk"
-    },
-    {
-      name: "Toy Story",
-      poster: "https://upload.wikimedia.org/wikipedia/en/1/13/Toy_Story.jpg",
-      rating: 4.8,
-      summary:
-        "Toy Story is a 1995 American computer-animated comedy film produced by Pixar Animation Studios and released by Walt Disney Pictures.",
-        trailer:"https://www.youtube.com/embed/rNk1Wi8SvNc"
-    },
+  const history = useHistory();
+  // const intmovies = [
+  //   {
+  //     name: "Cars",
+  //     poster: "https://upload.wikimedia.org/wikipedia/en/3/34/Cars_2006.jpg",
+  //     rating: 4.6,
+  //     summary:
+  //       "Cars is a 2006 American computer-animated sports comedy film produced by Pixar Animation Studios and released by Walt Disney Pictures.",
+  //     trailer:"https://www.youtube.com/embed/SbXIj2T-_uk"
+  //   },
+  //   {
+  //     name: "Toy Story",
+  //     poster: "https://upload.wikimedia.org/wikipedia/en/1/13/Toy_Story.jpg",
+  //     rating: 4.8,
+  //     summary:
+  //       "Toy Story is a 1995 American computer-animated comedy film produced by Pixar Animation Studios and released by Walt Disney Pictures.",
+  //       trailer:"https://www.youtube.com/embed/rNk1Wi8SvNc"
+  //   },
 
-    {
-      name: "Up",
-      poster:
-        "https://upload.wikimedia.org/wikipedia/en/0/05/Up_%282009_film%29.jpg",
-      rating: 4.3,
-      summary:
-        "Up is a 2009 American computer-animated film directed by Pete Docter, and co-written by Bob Peterson.",
-        trailer:"https://www.youtube.com/embed/ORFWdXl_zJ4"
+  //   {
+  //     name: "Up",
+  //     poster:
+  //       "https://upload.wikimedia.org/wikipedia/en/0/05/Up_%282009_film%29.jpg",
+  //     rating: 4.3,
+  //     summary:
+  //       "Up is a 2009 American computer-animated film directed by Pete Docter, and co-written by Bob Peterson.",
+  //       trailer:"https://www.youtube.com/embed/ORFWdXl_zJ4"
+  //   },
+  //   {
+  //     name: "Inside Out",
+  //     poster:
+  //       "https://upload.wikimedia.org/wikipedia/en/0/0a/Inside_Out_%282015_film%29_poster.jpg",
+  //     rating: 4.7,
+  //     summary:
+  //       "nside Out is a 2015 American computer-animated film directed by Pete Docter, who wrote the script with Meg LeFauve and Josh Cooley.",
+  //   trailer:"https://www.youtube.com/embed/yRUAzGQ3nSY"
+  //     },
+  //   {
+  //     name: "Jack-Jack Attack",
+  //     poster:
+  //       "https://upload.wikimedia.org/wikipedia/en/2/28/Jack-Jack_Attack_poster.jpg",
+  //     rating: 4.5,
+  //     summary:
+  //       "Jack-Jack Attack is a 2005 computer animated short film produced by Pixar and written and directed by Brad Bird. The short film is a spin-off on his 2004 film The Incredibles.",
+  //       trailer:"https://www.youtube.com/embed/0dQpFu8uRP0"
+  //   },
+  //   {
+  //     name: "The Good Dinosaur",
+  //     poster:
+  //       "https://upload.wikimedia.org/wikipedia/en/8/80/The_Good_Dinosaur_poster.jpg",
+  //     rating: 4.7,
+  //     summary:
+  //       "he Good Dinosaur is a 2015 American computer-animated adventure film[7] produced by Pixar Animation Studios and distributed by Walt Disney Studios Motion Pictures.",
+  //       trailer:"https://www.youtube.com/embed/O-RgquKVTPE"
+  //   },
+  //   {
+  //     name: "WALL-E",
+  //     poster: "https://upload.wikimedia.org/wikipedia/en/c/c2/WALL-Eposter.jpg",
+  //     rating: 4.9,
+  //     summary:
+  //       "WALL-E (stylized with an interpunct as WALL·E) is a 2008 American computer-animated science fiction film[4] produced by Pixar Animation Studios and released by Walt Disney Pictures.",
+  //       trailer:"https://www.youtube.com/embed/CZ1CATNbXg0"
+  //   }
+  // ];
+  const [theme, settheme] = useState("light");
+  const DarkTheme = createTheme({
+    palette: {
+      mode: theme,
     },
-    {
-      name: "Inside Out",
-      poster:
-        "https://upload.wikimedia.org/wikipedia/en/0/0a/Inside_Out_%282015_film%29_poster.jpg",
-      rating: 4.7,
-      summary:
-        "nside Out is a 2015 American computer-animated film directed by Pete Docter, who wrote the script with Meg LeFauve and Josh Cooley.",
-    trailer:"https://www.youtube.com/embed/yRUAzGQ3nSY"
-      },
-    {
-      name: "Jack-Jack Attack",
-      poster:
-        "https://upload.wikimedia.org/wikipedia/en/2/28/Jack-Jack_Attack_poster.jpg",
-      rating: 4.5,
-      summary:
-        "Jack-Jack Attack is a 2005 computer animated short film produced by Pixar and written and directed by Brad Bird. The short film is a spin-off on his 2004 film The Incredibles.",
-        trailer:"https://www.youtube.com/embed/0dQpFu8uRP0"
-    },
-    {
-      name: "The Good Dinosaur",
-      poster:
-        "https://upload.wikimedia.org/wikipedia/en/8/80/The_Good_Dinosaur_poster.jpg",
-      rating: 4.7,
-      summary:
-        "he Good Dinosaur is a 2015 American computer-animated adventure film[7] produced by Pixar Animation Studios and distributed by Walt Disney Studios Motion Pictures.",
-        trailer:"https://www.youtube.com/embed/O-RgquKVTPE"
-    },
-    {
-      name: "WALL-E",
-      poster: "https://upload.wikimedia.org/wikipedia/en/c/c2/WALL-Eposter.jpg",
-      rating: 4.9,
-      summary:
-        "WALL-E (stylized with an interpunct as WALL·E) is a 2008 American computer-animated science fiction film[4] produced by Pixar Animation Studios and released by Walt Disney Pictures.",
-        trailer:"https://www.youtube.com/embed/CZ1CATNbXg0"
-    }
-  ];
-  const [movies, setmovies] = useState(intmovies);
+  });
+  return (
+    // routing usng <Link> tag
+    <ThemeProvider theme={DarkTheme}>
+      <Paper sx={{ minHeight: "100vh" }} elevation={0}>
+        <div className="main">
+          <div className="header">
+            <AppBar position="static">
+              <Toolbar>
+                <Button color="inherit" onClick={() => history.push("/")}>
+                  Home
+                </Button>
+                <Button
+                  color="inherit"
+                  onClick={() => history.push("/Movies/add")}
+                >
+                  Add Movie
+                </Button>
+                <Button color="inherit" onClick={() => history.push("/Movies")}>
+                  Movies
+                </Button>
+                <Button
+                  color="inherit"
+                  onClick={() => history.push("/colorgame")}
+                >
+                  Color Game
+                </Button>
+                <Button
+                  style={{ marginLeft: "auto" }}
+                  color="inherit"
+                  onClick={() => settheme(theme === "dark" ? "light" : "dark")}
+                >
+                  {theme === "dark" ? <LightModeIcon /> : <NightsStayIcon />}{" "}
+                  {theme === "dark" ? "Light" : "Dark"} theme
+                </Button>
+              </Toolbar>
+            </AppBar>
+          </div>
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/Movies/add">
+              <AddMovie
+                movies={movies}
+                setmovies={setmovies}
+              />
+              {/* react matches by subsstring means it catches (displays) the first mmatched path in order to overcome we use exact attribute or keyword */}
+            </Route>
+            <Route path="/Movies/:id">
+              <Moviedetails movies={movies} />
+            </Route>
 
-  return ( // routing usng <Link> tag
-    <div className="App"> 
-      <div className="links">
-      <Link className="link" to="/">Home</Link>
-      <Link className="link" to="/addmovie">Add Movie</Link>
-      <Link className="link" to="/Movies">Movies</Link>
-      <Link className="link" to="/colorgame">Color Game</Link>
-      </div>
-<Switch>
-<Route exact path="/">
-  <Home/>
-  </Route>
-  <Route path="/Movies/:id">
-  <Moviedetails />
-  </Route>
-  <Route path="/Movies">
-    <MoviesList movies = {movies} setmovies={setmovies}/>
-  </Route>
-  <Route exact path="/colorgame">
-  <ColorPick/>
-  </Route>
-  <Route path="/addmovie">
-  <AddMovie intmovies={intmovies} movies = {movies} setmovies={setmovies}/>
-{/* react matches by subsstring means it catches (displays) the first mmatched path in order to overcome we use exact attribute or keyword */}
-  </Route>
-  <Route path="**">
-    <Notfound/>
-  </Route>
-</Switch>
+            <Route path="/Movies">
+              <MoviesList movies={movies} setmovies={setmovies} />
+            </Route>
+            <Route path="/colorgame">
+              <ColorPick />
+            </Route>
 
-      {/* //we can pass array as props as shown below */}
-    </div>
+            <Route path="**">
+              <Notfound />
+            </Route>
+          </Switch>
+
+          {/* //we can pass array as props as shown below */}
+        </div>
+      </Paper>
+    </ThemeProvider>
   );
 }
 
-function Moviedetails(){
-  const {id} = useParams()
-  return(
+function Moviedetails({ movies }) {
+  const { id } = useParams();
+  const movie = movies[id];
+  const { name, trailer, summary } = movie;
+  const history = useHistory();
+  return (
     <div>
-      <h1>hello {id}</h1>
-      {/* <iframe width="588" height="331" src={trailer} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */}
+      <h1>Movie name : {name}</h1>
+      <iframe
+        width="588"
+        height="331"
+        src={trailer}
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+      <p style={{ fontSize: "20px" }}>
+        <strong>Summary:</strong>
+        {summary}
+      </p>
+      <Button
+        variant="contained"
+        color="warning"
+        onClick={() => history.goBack()}
+      >
+        Go back
+      </Button>
     </div>
-  )
+  );
 }

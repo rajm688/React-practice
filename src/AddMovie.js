@@ -4,7 +4,7 @@ import { MovieList } from "./MovieList";
 import { useState } from "react";
 import Button from '@mui/material/Button';
 import {useHistory} from "react-router-dom";
-export function AddMovie({ intmovies , movies ,setmovies }) {
+export function AddMovie({ movies ,setmovies }) {
   const [name, setname] = useState("");
   const [poster, setposter] = useState("");
   const [rating, setrating] = useState("");

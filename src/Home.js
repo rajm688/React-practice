@@ -1,8 +1,9 @@
+import { styled } from '@mui/material/styles';
+const Div = styled('div')(({ theme }) => ({
+  ...theme.typography.button,
+  backgroundColor: theme.palette.background.paper,
+  padding: theme.spacing(1),
+}));
 export function Home() {
-  return (
-    <div>
-      <h1>Welcome to My React Practice</h1>
-    </div>
-  );
-
+  return <Div className='home'>{"🤞Welcome to My react Practice🤞"}</Div>;
 }

@@ -1,15 +1,16 @@
 import { useState } from "react";
-
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 export function ColorPicker() {
   const [color, setcolor] = useState(" ");
   const [colorlist, setcolorlist] = useState(["red", "blue", "green"]);
   const styles = { backgroundColor: color };
   return (
     <div>
-      <input style={styles} onChange={(e) => setcolor(e.target.value)} />
-      <button onClick={() => setcolorlist([...colorlist, color])}>
-        Click Me
-      </button>
+    <div className="color">
+      <TextField id="outlined-basic" label="Outlined" variant="outlined" style={styles} onChange={(e) => setcolor(e.target.value)} ></TextField>
+      <Button onClick={() => setcolorlist([...colorlist, color])} variant="contained">Click Me</Button>
+      </div>
       <div id="colorpallet">
         {colorlist.map((colors) => (
           <ColorPalette color={colors} />

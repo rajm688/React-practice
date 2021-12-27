@@ -16,9 +16,7 @@ h1 {
 body {
   background-color: mintcream;
 } */
-.App{
-  margin: 10px;
-}
+
 .movieslist {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -53,20 +51,20 @@ button {
   border: 0;
   background-color: white;
 }
-#inputs{
+#inputs {
   display: flex;
   justify-content: space-between;
   align-items: center;
-gap:10px
+  gap: 10px;
+  margin: 20px;
 }
-.badges{
-  margin:0 10px 0 10px;
+.badges {
+  margin: 0 10px 0 10px;
 }
-body{
-  font-family: 'Courgette', cursive;
-
+body {
+  font-family: "Courgette", cursive;
 }
-.color {
+.colors {
   font-family: sans-serif;
   text-align: center;
 }
@@ -74,13 +72,16 @@ body{
   display: flex;
   flex-wrap: wrap;
 }
-.links{
-  display: flex;
-  gap: 10px;
-  background-color: rgb(194, 194, 194);
-  padding: 10px;
+.header {
   margin: 0 0 10px 0;
 }
-.link{
-  text-decoration:none;
+.home{
+  text-align: center;
+  margin: 20px;
+  padding: 20px;
+  font-size: 40px;
+}
+.color{
+  padding: 10px;
+  gap:10px
 }

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useState } from "react";
+import { IconButton } from '@mui/material';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import Badge from '@mui/material/Badge';
@@ -11,19 +12,19 @@ export function Counter() {
   return (
     <div style={{display:"flex", gap: "10px"}}>
       <div><Badge badgeContent={like} color="success">
-    <button  onClick={() => setlike(like + 1)}>
+    <IconButton  onClick={() => setlike(like + 1)}>
         
         <ThumbUpIcon color="success"/>
         
-      </button>
+      </IconButton>
     </Badge>
     </div>
     <div>
     <Badge badgeContent={dislike} color="warning">
-    <button onClick={dislikefun}>
+    <IconButton onClick={dislikefun}>
         <ThumbDownAltIcon color="warning"/>
         
-      </button>
+      </IconButton>
     </Badge>
     </div>
     </div>
