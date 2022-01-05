@@ -18,10 +18,13 @@ export function AddMovie({ movies ,setmovies }) {
       <TextField className="input" onChange={(e) => setrating(e.target.value)} id="filled-basic" label="Enter the Movie Rating" variant="filled" />
       <TextField className="input" onChange={(e) => setsummary(e.target.value)} id="filled-basic" label="Enter the Movie Summary" variant="filled" />
       <Button  onClick={() =>{
-            const newmovie = { name, poster, rating, summary }
-            setmovies([...movies, newmovie ]);
-           history.push("/Movies")}
-          } variant="contained">Add Movie</Button> 
+    const newmovie = { name, poster, rating, summary }
+    // setmovies([...movies, newmovie ]);
+    fetch("https://61c9c7ff20ac1c0017ed8e43.mockapi.io/disney",
+    {method:"POST", 
+    body:JSON.stringify(newmovie), 
+    headers:{"Content-Type":"application/json",},}).then(data=>data.json()).then(()=>history.push("/Movies"))}}
+           variant="contained">Add Movie</Button> 
       </div>
      
     </>

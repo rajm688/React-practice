@@ -1,28 +1,50 @@
 import { Movie } from "./Movie";
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-export function MovieList({ movies, setmovies }) {
+import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";  
+import EditIcon from '@mui/icons-material/Edit';
+export function MovieList() {
+const [movielist, setmovies] = useState([]);
+const history = useHistory()
+  const getmovielist = () => {
+    fetch("https://61c9c7ff20ac1c0017ed8e43.mockapi.io/disney", {
+      method: "GET",
+    })
+      .then((data) => data.json())
+      .then((mvs) => setmovies(mvs));
+  };
+  useEffect(getmovielist, []);
   return (
     <>
-      {movies.map(
+      {movielist.map(
         (
           { name, poster, rating, summary, id },
           index // map and filter can take a second argument (index)
         ) => (
           <Movie
+          key={id}
             deletebutton={
               <IconButton
                 onClick={() => {
                   fetch(
                     `https://61c9c7ff20ac1c0017ed8e43.mockapi.io/disney/${id}`,
                     { method: "DELETE" }
-                  ).then((data) => data.json());
+                  )
+                    .then((data) => data.json())
+                    .then(() => getmovielist());
                 }} // we can refactor the function by right clicking -> refactor -> convert to inner function
               >
                 <DeleteIcon color="error" />
               </IconButton>
             }
-            id={index}
+            editbutton={<IconButton
+              onClick={()=>history.push(`Movie/edit/${id}`)} // we can refactor the function by right clicking -> refactor -> convert to inner function
+            >
+              <EditIcon color="info" />
+            </IconButton>}
+
+            id={id}
             name={name}
             poster={poster}
             rating={rating}
@@ -35,11 +57,11 @@ export function MovieList({ movies, setmovies }) {
 }
 
 // function deletefun(id) {
-  //   return () => {
-  //     const deleteindex = index;
-  //     const remainingMovies = movies.filter(
-  //       (mv, idx) => deleteindex !== idx
-  //     );
-  //     setmovies(remainingMovies);
-  //   };
+//   return () => {
+//     const deleteindex = index;
+//     const remainingMovies = movies.filter(
+//       (mv, idx) => deleteindex !== idx
+//     );
+//     setmovies(remainingMovies);
+//   };
 // }

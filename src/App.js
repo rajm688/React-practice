@@ -7,14 +7,15 @@ import { AddMovie, MoviesList } from "./AddMovie";
 import { ColorPick } from "./ColorPick";
 import { Home } from "./Home";
 import { Notfound } from "./Notfound";
-import { useParams } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import NightsStayIcon from "@mui/icons-material/NightsStay";
 import LightModeIcon from "@mui/icons-material/LightMode";
-import { useEffect } from "react";
+import { Moviedetails } from "./Moviedetails";
+import { Editingmovie } from "./Editingmovie";
+import { Forms } from "./Forms";
 // export default function App() {
 //   return (
 //     <div className="App">
@@ -140,12 +141,12 @@ import { useEffect } from "react";
 // }
 export default function App() {
   const [movies, setmovies] = useState([]);
-  const url = "https://61c9c7ff20ac1c0017ed8e43.mockapi.io/disney";
-  useEffect(() => {
-    fetch(url,{method:"GET"})
-      .then((data) => data.json())
-      .then((mvs) => setmovies(mvs));
-  }, []);
+  // const url = "https://61c9c7ff20ac1c0017ed8e43.mockapi.io/disney";
+  // useEffect(() => {
+  //   fetch(url,{method:"GET"})
+  //     .then((data) => data.json())
+  //     .then((mvs) => setmovies(mvs));
+  // }, []);
 
   const history = useHistory();
   // const intmovies = [
@@ -258,22 +259,30 @@ export default function App() {
             <Route exact path="/">
               <Home />
             </Route>
+           
             <Route path="/Movies/add">
-              <AddMovie
-                movies={movies}
-                setmovies={setmovies}
-              />
+              <AddMovie movies={movies} setmovies={setmovies} />
               {/* react matches by subsstring means it catches (displays) the first mmatched path in order to overcome we use exact attribute or keyword */}
             </Route>
+           
             <Route path="/Movies/:id">
               <Moviedetails movies={movies} />
             </Route>
+           
+            <Route path="/Movie/edit/:id">
+              <Editingmovie/>
+            </Route>
 
             <Route path="/Movies">
-              <MoviesList movies={movies} setmovies={setmovies} />
+              <MoviesList />
             </Route>
+           
             <Route path="/colorgame">
               <ColorPick />
+            </Route>
+
+            <Route path="/formvalidation">
+              <Forms />
             </Route>
 
             <Route path="**">
@@ -288,34 +297,3 @@ export default function App() {
   );
 }
 
-function Moviedetails({ movies }) {
-  const { id } = useParams();
-  const movie = movies[id];
-  const { name, trailer, summary } = movie;
-  const history = useHistory();
-  return (
-    <div>
-      <h1>Movie name : {name}</h1>
-      <iframe
-        width="588"
-        height="331"
-        src={trailer}
-        title="YouTube video player"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      ></iframe>
-      <p style={{ fontSize: "20px" }}>
-        <strong>Summary:</strong>
-        {summary}
-      </p>
-      <Button
-        variant="contained"
-        color="warning"
-        onClick={() => history.goBack()}
-      >
-        Go back
-      </Button>
-    </div>
-  );
-}

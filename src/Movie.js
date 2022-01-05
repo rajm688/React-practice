@@ -12,7 +12,7 @@ import { Counter } from "./Counter";
 import InfoIcon from '@mui/icons-material/Info';
 import { IconButton } from '@mui/material';
 import { useHistory } from 'react-router-dom';
-export function Movie({id, name, poster, rating, summary, deletebutton }) {
+export function Movie({id, name, poster, rating, summary, deletebutton,editbutton }) {
   //conditional styling using ternary operator
   //trenary operators and maping should be contained inside the {}
   const [show, setshow] = useState(true);
@@ -42,8 +42,8 @@ export function Movie({id, name, poster, rating, summary, deletebutton }) {
           {show ? <ExpandLessIcon/> :<ExpandMoreIcon/>}
         </IconButton>
       <IconButton onClick={()=>history.push(`/Movies/${id}`)} className='inlinebutton'><InfoIcon/></IconButton>
-
         <Counter />
+        {editbutton}
 
         {deletebutton}
       </div>

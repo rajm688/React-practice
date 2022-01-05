@@ -14,7 +14,7 @@ export function Counter() {
       <div><Badge badgeContent={like} color="success">
     <IconButton  onClick={() => setlike(like + 1)}>
         
-        <ThumbUpIcon color="success"/>
+        <ThumbUpIcon />
         
       </IconButton>
     </Badge>
@@ -22,7 +22,7 @@ export function Counter() {
     <div>
     <Badge badgeContent={dislike} color="warning">
     <IconButton onClick={dislikefun}>
-        <ThumbDownAltIcon color="warning"/>
+        <ThumbDownAltIcon />
         
       </IconButton>
     </Badge>
