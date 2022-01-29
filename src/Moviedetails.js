@@ -3,11 +3,12 @@ import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Button from "@mui/material/Button";
 import {useEffect,useState} from "react"
+import { API } from "./globaldata";
 export function Moviedetails() {
     const { id } = useParams();
   const [moviedetail, setmoviedetail] = useState([]);
   const getmoviedetails = () => {
-    fetch(`https://61c9c7ff20ac1c0017ed8e43.mockapi.io/disney/${id}`, {
+    fetch(`${API}/${id}`, {
       method: "GET",
     })
       .then((data) => data.json())

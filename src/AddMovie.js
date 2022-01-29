@@ -4,6 +4,7 @@ import { MovieList } from "./MovieList";
 import { useState } from "react";
 import Button from '@mui/material/Button';
 import {useHistory} from "react-router-dom";
+import {API} from "./globaldata"
 export function AddMovie({ movies ,setmovies }) {
   const [name, setname] = useState("");
   const [poster, setposter] = useState("");
@@ -20,7 +21,7 @@ export function AddMovie({ movies ,setmovies }) {
       <Button  onClick={() =>{
     const newmovie = { name, poster, rating, summary }
     // setmovies([...movies, newmovie ]);
-    fetch("https://61c9c7ff20ac1c0017ed8e43.mockapi.io/disney",
+    fetch(API,
     {method:"POST", 
     body:JSON.stringify(newmovie), 
     headers:{"Content-Type":"application/json",},}).then(data=>data.json()).then(()=>history.push("/Movies"))}}

@@ -4,11 +4,12 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";  
 import EditIcon from '@mui/icons-material/Edit';
+import { API } from "./globaldata";
 export function MovieList() {
 const [movielist, setmovies] = useState([]);
 const history = useHistory()
   const getmovielist = () => {
-    fetch("https://61c9c7ff20ac1c0017ed8e43.mockapi.io/disney", {
+    fetch(API, {
       method: "GET",
     })
       .then((data) => data.json())
@@ -28,7 +29,7 @@ const history = useHistory()
               <IconButton
                 onClick={() => {
                   fetch(
-                    `https://61c9c7ff20ac1c0017ed8e43.mockapi.io/disney/${id}`,
+                    `${API}/${id}`,
                     { method: "DELETE" }
                   )
                     .then((data) => data.json())

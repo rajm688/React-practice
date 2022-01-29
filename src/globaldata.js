@@ -1,0 +1,1 @@
+export const API = "https://61c9c7ff20ac1c0017ed8e43.mockapi.io/disney"

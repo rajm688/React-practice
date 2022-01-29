@@ -4,11 +4,12 @@ import { useState } from "react";
 import Button from '@mui/material/Button';
 import {useHistory,useParams} from "react-router-dom";
 import { useEffect } from "react";
+import {API} from "./globaldata"
 export function Editingmovie(){
     const { id } = useParams();
     const [moviedetail, setmoviedetail] = useState(null);
     const getmoviedetails = () => {
-      fetch(`https://61c9c7ff20ac1c0017ed8e43.mockapi.io/disney/${id}`, {
+      fetch(`${API}/${id}`, {
         method: "GET",
       })
         .then((data) => data.json())
@@ -37,7 +38,7 @@ export function Editingmovie(){
         <Button  onClick={() =>{
         const newmovie = { name, poster, rating, summary,trailer }
         // setmovies([...movies, newmovie ]);
-        fetch(`https://61c9c7ff20ac1c0017ed8e43.mockapi.io/disney/${movie.id}`,
+        fetch(`${API}/${movie.id}`,
         {method:"PUT", 
         body:JSON.stringify(newmovie), 
         headers:{"Content-Type":"application/json",},}).then(data=>data.json()).then(()=>history.push("/Movies"))}}
