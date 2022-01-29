@@ -9,7 +9,7 @@ export function MovieList() {
 const [movielist, setmovies] = useState([]);
 const history = useHistory()
   const getmovielist = () => {
-    fetch(API, {
+    fetch("https://nodepraactice.herokuapp.com/movies", {
       method: "GET",
     })
       .then((data) => data.json())
